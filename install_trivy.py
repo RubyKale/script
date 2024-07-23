@@ -77,7 +77,7 @@ if __name__ == "__main__":
     architecture = get_architecture_info()
     osName = get_osName_info()
     version = '0.53.0'
-    url = 'https://github.com/aquasecurity/trivy/releases/download/v0.53.0/'
+    url = f"https://github.com/aquasecurity/trivy/releases/download/v{version}/"
     filename = ''
 
     if architecture in ('x86', 'x86_64') and osName in ('Ubuntu'):
