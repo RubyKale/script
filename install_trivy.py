@@ -43,21 +43,26 @@ def install_package(filename,os):
         # Run the dpkg command to install the package
         if os in 'Ubuntu':
             result = subprocess.run(['sudo', 'dpkg', '-i', filename], capture_output=True, text=True, check=True)
+            # Resolve dependencies if any are missing- sudo apt-get install -f -y  used to fix broken dependencies on a Debian-based system like Ubuntu
+           
             result1 = subprocess.run(['sudo', 'apt-get', 'install', '-f', '-y'], capture_output=True, text=True, check=True)
+           
+            print("Dependency resolution output:", result1.stdout)
+            
+            if result1.stderr:
+                print("Dependency resolution errors:", result1.stderr)
+
         if os in 'Amazon':
             result = subprocess.run(['sudo', 'yum', 'localinstall', '-y', filename], capture_output=True, text=True, check=True)
+            
         # Print the output (stdout) and any errors (stderr)
         print("Installation output:", result.stdout)
+       
         if result.stderr:
             print("Installation errors:", result.stderr)
+            
         print(f"Package installed successfully from {filename}")
-
-        # Resolve dependencies if any are missing- sudo apt-get install -f -y  used to fix broken dependencies on a Debian-based system like Ubuntu
-        #result = subprocess.run(['sudo', 'apt-get', 'install', '-f', '-y'], capture_output=True, text=True, check=True)
-        print("Dependency resolution output:", result1.stdout)
-        if result1.stderr:
-            print("Dependency resolution errors:", result1.stderr)
-
+        
     except subprocess.CalledProcessError as e:
         print(f"Error occurred while installing the package: {e}")
 
