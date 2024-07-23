@@ -89,7 +89,7 @@ if __name__ == "__main__":
         filename = f"trivy_{version}_Linux-64bit.deb"
         url += filename
 
-    if 'ARM' in architecture and osName in 'Ubuntu':
+    if  ('ARM' in architecture or 'aarch' in architecture or 'AArch' in architecture) and osName in 'Ubuntu':
         filename = f"trivy_{version}_Linux-ARM.deb"
         url += filename
 
@@ -97,7 +97,7 @@ if __name__ == "__main__":
         filename = f"trivy_{version}_Linux-64bit.rpm"
         url += filename
 
-    if 'ARM' in architecture and osName in ('Amazon'):
+    if ('ARM' in architecture or 'aarch' in architecture or 'AArch' in architecture) and osName in ('Amazon'):
         filename = f"trivy_{version}_Linux-ARM.rpm"
         url += filename
 
